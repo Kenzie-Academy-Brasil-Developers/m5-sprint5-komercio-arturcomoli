@@ -43,7 +43,7 @@ DJANGO_APPS = [
 
 EXTERNAL_APPS = ["rest_framework", "rest_framework.authtoken"]
 
-MY_APPS = ["accounts"]
+MY_APPS = ["accounts", "products"]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + MY_APPS
 

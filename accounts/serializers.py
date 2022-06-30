@@ -23,6 +23,19 @@ class AccountSerializer(serializers.ModelSerializer):
         return Account.objects.create_user(**validated_data)
 
 
+class ShowSellerOnProductCreation(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = [
+            "id",
+            "email",
+            "first_name",
+            "last_name",
+            "is_seller",
+            "date_joined",
+        ]
+
+
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
