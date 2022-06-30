@@ -13,6 +13,13 @@ class ProductCreationSerializer(serializers.ModelSerializer):
         # extra_kwargs = {"seller": {"read_only": True}}
         depth = 1
 
+    def validate_quantity(self, quantity):
+        if quantity <= 0:
+            raise serializers.ValidationError(
+                "Ensure this value is an integer bigger than 0"
+            )
+        return quantity
+
 
 class ProductListSerializer(serializers.ModelSerializer):
     seller_id = serializers.IntegerField(read_only=True, source="seller.id")
