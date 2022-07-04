@@ -1,3 +1,4 @@
+import ipdb
 from rest_framework import generics, views
 from rest_framework.authentication import TokenAuthentication, authenticate
 from rest_framework.authtoken.models import Token
@@ -87,6 +88,7 @@ class ToggleIsActiveView(generics.UpdateAPIView):
         return Response(serializer.data)
 
     # def perform_update(self, serializer):
+    #     ipdb.set_trace()
     #     try:
     #         serializer.save()
     #     except CannotUpdateKeyError as err:

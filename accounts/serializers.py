@@ -1,3 +1,4 @@
+import ipdb
 from rest_framework import serializers
 
 from accounts.exceptions import CannotUpdateKeyError
@@ -6,6 +7,9 @@ from .models import Account
 
 
 class AccountSerializer(serializers.ModelSerializer):
+
+    is_seller = serializers.BooleanField()
+
     class Meta:
         model = Account
         fields = [
@@ -73,6 +77,9 @@ class UpdateAccountSerializer(serializers.ModelSerializer):
 
 
 class ToggleIsActive(serializers.ModelSerializer):
+
+    is_active = serializers.BooleanField(required=True)
+
     class Meta:
         model = Account
         fields = [
@@ -94,15 +101,14 @@ class ToggleIsActive(serializers.ModelSerializer):
             "date_joined",
         ]
 
-    def update(self, instance, validated_data):
-        is_active = validated_data.pop("is_active", None)
-        if not is_active:
-            raise CannotUpdateKeyError("is_active is required.")
+        def update(self, instance, validated_data):
+            is_active = validated_data.pop("is_active", None)
+            if not is_active:
+                raise CannotUpdateKeyError("is_active is required.")
+            instance.is_active = is_active
+            instance.save()
 
-        instance.is_active = is_active
-        instance.save()
-
-        return instance
+            return instance
 
 
 class LoginSerializer(serializers.Serializer):
