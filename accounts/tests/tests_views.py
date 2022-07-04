@@ -7,7 +7,7 @@ from rest_framework.test import APITestCase
 from rest_framework.views import status
 
 
-class AccountCreationTestView(APITestCase):
+class AccountTestView(APITestCase):
     @classmethod
     def setUpTestData(cls) -> None:
 
